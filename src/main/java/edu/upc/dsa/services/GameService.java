@@ -1,9 +1,11 @@
 package edu.upc.dsa.services;
 
 
-import edu.upc.dsa.TracksManager;
-import edu.upc.dsa.TracksManagerImpl;
-import edu.upc.dsa.models.Track;
+import edu.upc.dsa.GameManager;
+import edu.upc.dsa.GameManagerImpl;
+import edu.upc.dsa.GameManager;
+import edu.upc.dsa.GameManagerImpl;
+import edu.upc.dsa.models.Juego;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -13,28 +15,27 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
 
 @Api(value = "/tracks", description = "Endpoint to Track Service")
 @Path("/tracks")
-public class TracksService {
+public class GameService {
 
-    private TracksManager tm;
+    private GameManager gm;
 
-    public TracksService() {
-        this.tm = TracksManagerImpl.getInstance();
-        if (tm.size()==0) {
-            this.tm.addTrack("La Barbacoa", "Georgie Dann");
-            this.tm.addTrack("Despacito", "Luis Fonsi");
-            this.tm.addTrack("Enter Sandman", "Metallica");
+    public GameService() {
+        this.gm = GameManagerImpl.getInstance();
+        if (gm.size()==0) {
+            this.gm.addTrack("La Barbacoa", "Georgie Dann");
+            this.gm.addTrack("Despacito", "Luis Fonsi");
+            this.gm.addTrack("Enter Sandman", "Metallica");
         }
 
 
     }
 
     @GET
-    @ApiOperation(value = "get all Track", notes = "asdasd")
+    @ApiOperation(value = "get all Tracks", notes = "asdasd")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful", response = Track.class, responseContainer="List"),
     })
@@ -42,7 +43,7 @@ public class TracksService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTracks() {
 
-        List<Track> tracks = this.tm.findAll();
+        List<Track> tracks = this.gm.findAll();
 
         GenericEntity<List<Track>> entity = new GenericEntity<List<Track>>(tracks) {};
         return Response.status(201).entity(entity).build()  ;
