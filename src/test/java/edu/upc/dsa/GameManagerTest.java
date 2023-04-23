@@ -7,6 +7,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static edu.upc.dsa.models.Estado.*;
+
 /**
  * Created by juan on 16/11/16.
  */
@@ -44,21 +46,24 @@ public class GameManagerTest {
         Assert.assertEquals(2,manager.numProductos());
     }
    /** Para crearJuegoTest hay que poner un idJuego que no este creado **/
-   @Test
-   public void crearJuegoTest() throws UsuarioActivoException, JuegoNoExisteException, JuegoActivoException, JuegoYaExisteException {
-       //manager.crearJuego("4",5,10);
-       Assert.assertEquals("INICIADO_EN_PREPARACION",manager.crearJuego("4",5,10));
+    /** Para crearJuegoTest hay que poner un idJuego que no este creado **/
+    @Test
+    public void crearJuegoTest() throws UsuarioActivoException, JuegoNoExisteException, JuegoActivoException, JuegoYaExisteException {
+        manager.crearJuego("4",5,10);
+        Assert.assertEquals(INICIADO_EN_PREPARACION,manager.consultarEstado());
 
-   }
+    }
     /** Para iniciarPartidaTest hay que poner un idJuego que ya este creado y un idUsuario que no este en una partida**/
-   @Test
+    @Test
     public void iniciarPartidaTest() throws UsuarioActivoException, JuegoNoExisteException, JuegoActivoException {
-        Assert.assertEquals("INICIADO_EN_FUNCIONAMIENTO",manager.iniciarPartida("1","1"));
+        manager.iniciarPartida("1","1");
+        Assert.assertEquals(INICIADO_EN_FUNCIONAMIENTO,manager.consultarEstado());
 
     }
     @Test
     public void finalizarJuegoTest() throws JuegoNoExisteException{
-       Assert.assertEquals("FINALIZADO",manager.finalizarJuego("1"));
+        manager.finalizarJuego("1");
+        Assert.assertEquals(FINALIZADO, manager.consultarEstado());
     }
     @Test
     public void consultarVidaTest() throws UsuarioActivoException, JuegoNoExisteException, JuegoActivoException, UsuarioNoExisteException {

@@ -24,8 +24,7 @@ PARTE 1
 - iniciarPartida modificado para que cumpla el requisito de añadir usuarios a los equipos.
 - Atributos DSA_coins y Vida movidos de clase Partida a clase Usuario.
 - Operaciones “Actualización del valor de vida de un usuario” y “Compra de un producto por parte de un usuario” implementadas.
-- Operacion "Consulta el valor de vida de un equipo" da problemas.
-- Operación consultarEstado implementada y funcional pero problema AssertEquals.
+- Operación "Consulta el valor de vida de un equipo" da problemas.
 - Adición de distintas estructuras de datos para gestionar todas las operaciones.
 - Tests JUNIT funcionales.
 
